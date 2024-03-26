@@ -1,16 +1,17 @@
-def check_if_positive(a,b,c):
-    num_list = []
-    num_list.extend([a,b,c])
-    count = 0
+def digit_sum(num):
+    return sum(int(digit) for digit in str(num))
 
-    for num in num_list:
-        count = count + 1 if num > 0 and num % 2 == 0 else count
-               
-    # Checks if exactly two numbers are divisible by 2    
-    if count == 2:
-        print("True")
-    else:
-        print("False")
+def solution(A):
+    digit_sums = set()
 
-# Takes three number inputs and passes them to the function    
-check_if_positive(int(input("Num1: ")), int(input("Num2: ")), int(input("Num3: ")))
+    for num in A:
+        digit_sum_value = digit_sum(num)
+
+        # If we find a pair with equal digit sum, calculate the sum and return it
+        if digit_sum_value in digit_sums:
+            return num + max(A)
+
+        digit_sums.add(digit_sum_value)
+
+    # If no pair is found, return -1
+    return -1
